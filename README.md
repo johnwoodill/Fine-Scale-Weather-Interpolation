@@ -24,8 +24,10 @@ The following outlines the procedure for building fine scale weather data.
   * Data: http://www.prism.oregonstate.edu/historical/     
   * Note: Need to download ppt, tmax, and tmin separately
   * Climate Variable: (1) Precipitation; (2) Minimum Temperature; (3) Maxiumum Temperature
-  * Temporal Period: 1895 <= 1951 <= 1980
+  * Temporal Period: 1895 <= 1895 <= 1980
   * Click: "Download All Historical Data (.bil)" for each climate variable
+  * Data: http://www.prism.oregonstate.edu/recent/
+  * Click: "Download All Data for All Years (.bil)" for each climate variable
   After downloading all ppt, tmax, and tmin be sure to unzip each of the files in a separate directory and remove everything except for all files ending in .bil and .hdr; these are the main files needed to extract all the data.  The other files are  .csv files that contain meta data for each grid.
   
 **Spline Interpolation and Relative Anamoly Methodology**
