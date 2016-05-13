@@ -1,8 +1,6 @@
-## Non-Linear-Temperature-Effects-of-the-Dust-Bowl
+### Building Fine Scale Weather Data from 1900-2013
 
-### Building Fine Scale Weather Data from 1900-1950
-
-In order to determine non-linear temperature effects fine scale (daily) gridded weather data needs to be available.  Unfortunately, this data does not exist for the historical time period 1900-1950.  There is daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations throughout this period and in the Dust Bowl region, but it is sparse and not consistent across days.
+In order to determine non-linear temperature effects fine scale (daily) gridded weather data needs to be available.  Unfortunately, this data does not exist for the historical time period 1900-2013.  There is daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations throughout this period and in the Dust Bowl region, but it is sparse and not consistent across days.
 
 PRISM (http://www.prism.oregonstate.edu/) data is some of the best weather data available and is gridded on 2.5 x 2.5 mile scale across the same region; however, daily data is not available, but monthly data is available.  In order to build fine scale weather data both NCDC and PRISM data sets will be used.  
 
