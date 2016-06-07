@@ -125,8 +125,8 @@ weights <- function(m_coord, s_coord){
   return(w_mat)
 }
 
-ra <- function(row_loc, weights){
-  
+
+ra <- function(row_loc, sweight){
   s_values <- stack[row_loc:(row_loc+4),8]
   z <- is.na(s_values)
   v <- (weights %*% ifelse(z, 0, s_values)) / (weights %*% !z)
@@ -198,7 +198,7 @@ comp <- function(x){
   stack <- rbind(s1, s2, s3, s4, s5)
   stack <- arrange(stack, date, element)
   
-  newval <- sapply(1:nrow(station), function (i) station[i,13] * ra(row_loc = (5*(i-1)+1), weights = weight))
+  newval <- sapply(1:nrow(station), function (i) station[i,13] * ra(row_loc = (5*(i-1)+1), sweight = weight))
   newval <- round(newval, 4)
   
   station$values <- newval
@@ -235,7 +235,7 @@ comp <- function(x){
 
 library(parallel)
 i <- unique(files)
-cl <- makeCluster(10)
+cl <- makeCluster(16)
 clusterExport(cl, c("prism_nearest", "ncdc_lookup"))
 clusterExport(cl, c("check", "weights", "ra"))
 clusterCall(cl, function() library(dplyr))

@@ -1,6 +1,14 @@
+Complete
+--------------------------
+* tmax_tmin_interpolation_mc.R can be run after finished cleaning dates
+* Dates were not the same for station and s1, s2, s3, s4, s5, so running ncdc_convert again
+
+
+
+
 Current Run:
 --------------------------
-* Dates were not the same for station and s1, s2, s3, s4, s5, so running ncdc_convert again
+* tmax and tmin interpolation
 
 
 
@@ -9,4 +17,3 @@ Current Run:
 
 To Do
 --------------------------
-* tmax_tmin_interpolation_mc.R can be run after finished cleaning dates
