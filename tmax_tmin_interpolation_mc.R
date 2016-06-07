@@ -113,7 +113,7 @@ check <- function(y){
 }
 
 # Function to get weights
-weights <- function(m_coord, s_coord){
+sweights <- function(m_coord, s_coord){
   d_mat <- rdist(m_coord, s_coord)
   w_mat <- 1 / d_mat ^ 2
   is_inf <- is.infinite(w_mat)
@@ -126,10 +126,10 @@ weights <- function(m_coord, s_coord){
 }
 
 
-ra <- function(row_loc, sweight){
-  s_values <- stack[row_loc:(row_loc+4),8]
+ra <- function(row_loc, sweight, sstack){
+  s_values <- sstack[row_loc:(row_loc+4),8]
   z <- is.na(s_values)
-  v <- (weights %*% ifelse(z, 0, s_values)) / (weights %*% !z)
+  v <- (sweight %*% ifelse(z, 0, s_values)) / (sweight %*% !z)
   return(v)
 } 
 
@@ -153,7 +153,7 @@ comp <- function(x){
   s <- filter(ncdc_lookup, id %in% c(prism_nearest[loc,4:8]))
   m_coord <- station[1,9:10]
   s_coord <- data.frame(lat = s$lat, long = s$long)
-  weight <- weights(m_coord, s_coord)
+  weight <- sweights(m_coord, s_coord)
 
   s1 <- readRDS(paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/NCDC/rds/", prism_nearest[loc,4], ".rds"))
   s2 <- readRDS(paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/NCDC/rds/", prism_nearest[loc,5], ".rds"))
@@ -195,10 +195,10 @@ comp <- function(x){
   s4$r <- s4$value / station$value 
   s5$r <- s5$value / station$value 
   
-  stack <- rbind(s1, s2, s3, s4, s5)
-  stack <- arrange(stack, date, element)
+  sstack <- rbind(s1, s2, s3, s4, s5)
+  sstack <- arrange(sstack, date, element)
   
-  newval <- sapply(1:nrow(station), function (i) station[i,13] * ra(row_loc = (5*(i-1)+1), sweight = weight))
+  newval <- sapply(1:nrow(station), function (i) station[i,13] * ra(row_loc = (5*(i-1)+1), sweight = weight, sstack = sstack))
   newval <- round(newval, 4)
   
   station$values <- newval
@@ -237,7 +237,7 @@ library(parallel)
 i <- unique(files)
 cl <- makeCluster(16)
 clusterExport(cl, c("prism_nearest", "ncdc_lookup"))
-clusterExport(cl, c("check", "weights", "ra"))
+clusterExport(cl, c("check", "sweights", "ra"))
 clusterCall(cl, function() library(dplyr))
 clusterCall(cl, function() library(reshape2))
 clusterCall(cl, function() library(tidyr))
