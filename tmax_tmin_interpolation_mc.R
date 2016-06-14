@@ -18,11 +18,16 @@
 
 library(dplyr)
 library(parallel)
-cl <- makeCluster(8)
+cl <- makeCluster(10)
 
 
 # Load PRISM monthly data from prism_convert.R
 i <- unique(list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/"))
+
+# For subsetting missing files
+miss <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/base/")
+missing <- setdiff(i, miss)
+i <- missing
 
 # Load lat and long data for gridNumber verification
 prism_lookup_unique <- readRDS("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/prism_lookup_unique.rds")
