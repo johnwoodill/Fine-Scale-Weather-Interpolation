@@ -95,10 +95,7 @@ clusterExport(cl, c("splinefun", "spline"))
 clusterCall(cl, function() library(dplyr))
 parLapply(cl, X = i, fun = comp)
 
-for (i in missing){
-  tryCatch({comp(i)}, error = function(e){print(i)})
-}
-	
+
 	
 ###############################################################################################################################
 #
@@ -249,11 +246,10 @@ library(parallel)
 i <- unique(files)
 
 # Subset out gridNumbers already complete
-/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/grids/
-files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/")
+prismfiles <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/base/")
+basefiles <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/grids/")
 files <- substr(basename(files), 1, nchar(basename(files))-4)
-gridNumber <- setdiff(gridNumber, files)
-gridNumber <- missing
+i <- setdiff(prismfiles, basefiles)
 
 cl <- makeCluster(16)
 clusterExport(cl, c("prism_nearest", "ncdc_lookup"))
