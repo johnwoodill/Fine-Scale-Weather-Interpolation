@@ -190,6 +190,7 @@ gridNumber <- unique(df_tmin$gridNumber)
 files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/")
 files <- substr(basename(files), 1, nchar(basename(files))-4)
 gridNumber <- setdiff(gridNumber, files)
+gridNumber <- missing
 
 # Creat progress bar as this for loop takes a while
 pb <- txtProgressBar(min = 0, max = length(gridNumber), initial = 0)
@@ -221,4 +222,4 @@ for (i in unique(gridNumber)) {
   setTxtProgressBar(pb, stepi)
 }
 
-length(list.files("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/PRISM/gridNumber/"))
+length(list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/"))

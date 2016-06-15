@@ -18,16 +18,11 @@
 
 library(dplyr)
 library(parallel)
-cl <- makeCluster(10)
+cl <- makeCluster(16)
 
 
 # Load PRISM monthly data from prism_convert.R
-i <- unique(list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/"))
-
-# For subsetting missing files
-miss <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/base/")
-missing <- setdiff(i, miss)
-i <- missing
+i <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/")
 
 # Load lat and long data for gridNumber verification
 prism_lookup_unique <- readRDS("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/prism_lookup_unique.rds")
@@ -87,10 +82,22 @@ comp <- function(x) {
 
 }
 
-	clusterExport(cl, c("prism_lookup_unique", "base"))
-	clusterExport(cl, c("splinefun", "spline"))
-	clusterCall(cl, function() library(dplyr))
-	parLapply(cl, X = i, fun = comp)
+length(list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/base/"))
+
+# For subsetting missing files
+i <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/")
+miss <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/base/")
+missing <- setdiff(i, miss)
+i <- missing
+
+clusterExport(cl, c("prism_lookup_unique", "base"))
+clusterExport(cl, c("splinefun", "spline"))
+clusterCall(cl, function() library(dplyr))
+parLapply(cl, X = i, fun = comp)
+
+for (i in missing){
+  tryCatch({comp(i)}, error = function(e){print(i)})
+}
 	
 	
 ###############################################################################################################################
@@ -240,6 +247,14 @@ comp <- function(x){
 
 library(parallel)
 i <- unique(files)
+
+# Subset out gridNumbers already complete
+/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/grids/
+files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/PRISM/gridNumber/")
+files <- substr(basename(files), 1, nchar(basename(files))-4)
+gridNumber <- setdiff(gridNumber, files)
+gridNumber <- missing
+
 cl <- makeCluster(16)
 clusterExport(cl, c("prism_nearest", "ncdc_lookup"))
 clusterExport(cl, c("check", "sweights", "ra"))
