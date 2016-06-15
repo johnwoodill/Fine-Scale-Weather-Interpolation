@@ -1,10 +1,14 @@
-## Non-Linear-Temperature-Effects-of-the-Dust-Bowl
+### Building Fine Scale Weather Data from 1900-2013
 
-### Building Fine Scale Weather Data from 1900-1950
+**About**
 
-In order to determine non-linear temperature effects fine scale (daily) gridded weather data needs to be available.  Unfortunately, this data does not exist for the historical time period 1900-1950.  There is daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations throughout this period and in the Dust Bowl region, but it is sparse and not consistent across days.
+The following repo builds daily gridded weather data for the continental United States from 1900-2013.  The data is allocated to grids and then aggregated to fips (zip codes).  Degree days and degree time are calculated as a result of fine scale weather data.
 
-PRISM (http://www.prism.oregonstate.edu/) data is some of the best weather data available and is gridded on 2.5 x 2.5 mile scale across the same region; however, daily data is not available, but monthly data is available.  In order to build fine scale weather data both NCDC and PRISM data sets will be used.  
+**Introduction**
+
+In order to determine non-linear temperature effects fine scale (daily) gridded weather data needs to be available.  Unfortunately, this data does not exist for the historical time period 1900-1950.  There are daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations, but it is sparse and not consistent across days.
+
+PRISM (http://www.prism.oregonstate.edu/) data is some of the best weather data available and is gridded on 2.5 x 2.5 mile scale across the same region. Daily data is not available, but monthly data is.  In order to build fine scale weather data both NCDC and PRISM data sets will be used.  
 
 The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.
 
@@ -28,7 +32,7 @@ The following outlines the procedure for building fine scale weather data.
   * Click: "Download All Historical Data (.bil)" for each climate variable
   * Data: http://www.prism.oregonstate.edu/recent/
   * Click: "Download All Data for All Years (.bil)" for each climate variable
-  After downloading all ppt, tmax, and tmin be sure to unzip each of the files in a separate directory and remove everything except for all files ending in .bil and .hdr; these are the main files needed to extract all the data.  The other files are  .csv files that contain meta data for each grid.
+  After downloading all tmax and tmin be sure to unzip each of the files in a separate directory and remove everything except for all files ending in .bil and .hdr; these are the main files needed to extract all the data.  The other files are  .csv files that contain meta data for each grid.
   
 **Spline Interpolation and Relative Anamoly Methodology**
 
@@ -58,13 +62,13 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 **Data Setup Folder**
 
 1. [ncdc_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ncdc_convert.R): Converts and cleans up ncdc data for Dust Bowl region
-  * (1) Subset out NCDC stations with data greater than 1899 and in the Dust Bowl Region
+  * (1) Subset out NCDC stations with data greater than 1899 and the region
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
     * [ghcnd-stations.csv](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ghcnd-stations.csv)
     * [ghcnd-inventory.txt](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ghcnd-inventory.txt)
 
-2. [prism_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/prism_convert.R): converts and cleans up PRISM data for Dust Bowl region
+2. [prism_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
   * (2) Merge and save each gridNumber for each tmax and tmin to directory
   * File Needed: 
