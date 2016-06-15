@@ -38,22 +38,21 @@ The following outlines the procedure for building fine scale weather data.
 
 The following outlines the methodology for developing fine scale data using spline interpolation of PRISM monthly averages and relative anamoly of NCDC daily data for closest stations.
 
-For a minimum reproducible example in R see an [R Markdown Documentation](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Documentation/Interpolation%20Technique/interpolation_technique.pdf) and the [R Code](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Documentation/Interpolation%20Technique/interpolation_technique_example.R).
+For a minimum reproducible example in R see an [R Markdown Documentation](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf) and the [R Code](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique_example.R).
 
 As discussed above, the main idea is to use a spline to interpolate monthly averages for PRISM and then use the relative anamoly from the inverse distance weight to determine the daily data for each gridded station.  The following two images show the available NCDC stations (black dots) located on a map and all of the gridded stations available with their lat/long coordinates.  Note that PRISM provides many more available stations which will provide more stations for non-linear temperature effects.
 
-![NCDC Stations](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Figures/NCDC_Stations.png)
+![NCDC Stations](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Figures/NCDC_Stations.png)
 
-![PRISM Stations](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Figures/PRISM_Stations.png)
-
+![PRISM Stations](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Figures/PRISM_Stations.png)
 
 
 1. Place midpoints of PRISM monthly data
   * Use PRISM monthly temperature averages (tmax and tmin) and place at midpoints, then run a spline through each month of each year for each PRISM grid.  The following graph shows the spline interpolation for 3 months:
-![Spline Interpolation](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Documentation/Interpolation%20Technique/Spline_Interpolation.png)
+![Spline Interpolation](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Figures/Spline_Interpolation.png)
 2. Relative Anamoly Interpolation
   * Use the Inverse Distance Weighted (IDW) relative anamoly to further interpolate the data.  The following shows a graph of the interpolated points from IDW and the previous spline:
-![RA Interpolation](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Documentation/Interpolation%20Technique/RA_Interpolation.png)
+![RA Interpolation](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Figures/RA_Interpolation.png)
 
 ##R Code File Descriptions
 
