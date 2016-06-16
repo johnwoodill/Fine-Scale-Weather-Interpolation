@@ -17,28 +17,28 @@ fartocel <- function(x) (x-32) * 5/9
 bound_list <- c(0:35)
 
 comp <- function(x){
-df <- readRDS(paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/", x))
- 
-# Turn to celcius
-df$tmax <- fartocel(df$tmax)
-df$tmin <- fartocel(df$tmin)
-
-# Generate average temp
-df$tavg <- (df$tmax + df$tmin)/2
-
-# Generate new columns for degree days from bould_list
-nc <- ncol(df)
-
-for (i in 1:length(bound_list)){
-  col <- paste0("dday_", bound_list[i])
-  cadd <- i + nc
-  b <- bound_list[i]
-  df[,cadd] <- 0
-  df[,cadd] <-ifelse(b <= df$tmin, df$tavg - b, 0)
-  temp <- acos((2*b - df$tmax - df$tmin)/(df$tmax - df$tmin))
-  df[,cadd] <- ifelse(df$tmin < b & b < df$tmax, ((df$tavg - b)*temp + (df$tmax - df$tmin)*sin(temp)/2)/pi, df[,cadd])
-  df[,cadd] <- round(df[,cadd], 5)
-  colnames(df)[cadd] <- col
+  df <- readRDS(paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/", x))
+   
+  # Turn to celcius
+  df$tmax <- fartocel(df$tmax)
+  df$tmin <- fartocel(df$tmin)
+  
+  # Generate average temp
+  df$tavg <- (df$tmax + df$tmin)/2
+  
+  # Generate new columns for degree days from bould_list
+  nc <- ncol(df)
+  
+  for (i in 1:length(bound_list)){
+    col <- paste0("dday_", bound_list[i])
+    cadd <- i + nc
+    b <- bound_list[i]
+    df[,cadd] <- 0
+    df[,cadd] <-ifelse(b <= df$tmin, df$tavg - b, 0)
+    temp <- acos((2*b - df$tmax - df$tmin)/(df$tmax - df$tmin))
+    df[,cadd] <- ifelse(df$tmin < b & b < df$tmax, ((df$tavg - b)*temp + (df$tmax - df$tmin)*sin(temp)/2)/pi, df[,cadd])
+    df[,cadd] <- round(df[,cadd], 5)
+    colnames(df)[cadd] <- col
 }
 
 agg <- df %>% 
@@ -82,18 +82,24 @@ agg <- df %>%
             tmin = mean(tmin),
             tmax = mean(tmax),
             tavg = mean(tavg))
-
-saveRDS(agg, paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/", x))
+    
+    saveRDS(agg, paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/", x))
+    rm(df)
+    rm(agg)
 }
 
 files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/")
+infiles <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/")
 i <- files
+i <- setdiff(files, infiles)
 
 library(parallel)
-cl <- makeCluster(20)
+cl <- makeCluster(16)
 clusterExport(cl, c("fartocel"))
+clusterExport(cl, c("bound_list"))
 clusterCall(cl, function() library(dplyr))
 parLapply(cl, X = i, fun = comp)
+stopCluster(cl)
 
 #rbind together
 files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/", full.names = TRUE)
