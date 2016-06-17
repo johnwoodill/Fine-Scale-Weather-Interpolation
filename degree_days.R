@@ -30,7 +30,7 @@ comp <- function(x){
   nc <- ncol(df)
   
   for (i in 1:length(bound_list)){
-    col <- paste0("dday_", bound_list[i])
+    col <- paste0("dday", bound_list[i], "C")
     cadd <- i + nc
     b <- bound_list[i]
     df[,cadd] <- 0
@@ -41,55 +41,99 @@ comp <- function(x){
     colnames(df)[cadd] <- col
 }
 
-agg <- df %>% 
+# Sum over each grid days
+df <- df %>% 
   group_by(gridNumber, fips, year, month) %>% 
-  summarize(dday_0 = sum(dday_0),
-            dday_1 = sum(dday_1),
-            dday_2 = sum(dday_2),
-            dday_3 = sum(dday_3),
-            dday_4 = sum(dday_4),
-            dday_5 = sum(dday_5),
-            dday_6 = sum(dday_6),
-            dday_7 = sum(dday_7),
-            dday_8 = sum(dday_8),
-            dday_9 = sum(dday_9),
-            dday_10 = sum(dday_10),
-            dday_11 = sum(dday_11),
-            dday_12 = sum(dday_12),
-            dday_13 = sum(dday_13),
-            dday_14 = sum(dday_14),
-            dday_15 = sum(dday_15),
-            dday_16 = sum(dday_16),
-            dday_17 = sum(dday_17),
-            dday_18 = sum(dday_18),
-            dday_19 = sum(dday_19),
-            dday_20 = sum(dday_20),
-            dday_21 = sum(dday_21),
-            dday_22 = sum(dday_22),
-            dday_23 = sum(dday_23),
-            dday_24 = sum(dday_24),
-            dday_25 = sum(dday_25),
-            dday_26 = sum(dday_26),
-            dday_27 = sum(dday_27),
-            dday_28 = sum(dday_28),
-            dday_29 = sum(dday_29),
-            dday_30 = sum(dday_30),
-            dday_31 = sum(dday_31),
-            dday_32 = sum(dday_32),
-            dday_33 = sum(dday_33),
-            dday_34 = sum(dday_34),
-            dday_35 = sum(dday_35),
+  summarize(dday0C = sum(dday0C),
+            dday1C = sum(dday1C),
+            dday2C = sum(dday2C),
+            dday3C = sum(dday3C),
+            dday4C = sum(dday4C),
+            dday5C = sum(dday5C),
+            dday6C = sum(dday6C),
+            dday7C = sum(dday7C),
+            dday8C = sum(dday8C),
+            dday9C = sum(dday9C),
+            dday10C = sum(dday10C),
+            dday11C = sum(dday11C),
+            dday12C = sum(dday12C),
+            dday13C = sum(dday13C),
+            dday14C = sum(dday14C),
+            dday15C = sum(dday15C),
+            dday16C = sum(dday16C),
+            dday17C = sum(dday17C),
+            dday18C = sum(dday18C),
+            dday19C = sum(dday19C),
+            dday20C = sum(dday20C),
+            dday21C = sum(dday21C),
+            dday22C = sum(dday22C),
+            dday23C = sum(dday23C),
+            dday24C = sum(dday24C),
+            dday25C = sum(dday25C),
+            dday26C = sum(dday26C),
+            dday27C = sum(dday27C),
+            dday28C = sum(dday28C),
+            dday29C = sum(dday29C),
+            dday30C = sum(dday30C),
+            dday31C = sum(dday31C),
+            dday32C = sum(dday32C),
+            dday33C = sum(dday33C),
+            dday34C = sum(dday34C),
+            dday35C = sum(dday35C),
             tmin = mean(tmin),
             tmax = mean(tmax),
             tavg = mean(tavg))
     
-    saveRDS(agg, paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/", x))
-    rm(df)
-    rm(agg)
+# Average over each fips
+df <- df %>% 
+  group_by(fips, year, month) %>% 
+  summarize(dday0C = mean(dday0C),
+            dday1C = mean(dday1C),
+            dday2C = mean(dday2C),
+            dday3C = mean(dday3C),
+            dday4C = mean(dday4C),
+            dday5C = mean(dday5C),
+            dday6C = mean(dday6C),
+            dday7C = mean(dday7C),
+            dday8C = mean(dday8C),
+            dday9C = mean(dday9C),
+            dday10C = mean(dday10C),
+            dday11C = mean(dday11C),
+            dday12C = mean(dday12C),
+            dday13C = mean(dday13C),
+            dday14C = mean(dday14C),
+            dday15C = mean(dday15C),
+            dday16C = mean(dday16C),
+            dday17C = mean(dday17C),
+            dday18C = mean(dday18C),
+            dday19C = mean(dday19C),
+            dday20C = mean(dday20C),
+            dday21C = mean(dday21C),
+            dday22C = mean(dday22C),
+            dday23C = mean(dday23C),
+            dday24C = mean(dday24C),
+            dday25C = mean(dday25C),
+            dday26C = mean(dday26C),
+            dday27C = mean(dday27C),
+            dday28C = mean(dday28C),
+            dday29C = mean(dday29C),
+            dday30C = mean(dday30C),
+            dday31C = mean(dday31C),
+            dday32C = mean(dday32C),
+            dday33C = mean(dday33C),
+            dday34C = mean(dday34C),
+            dday35C = mean(dday35C),
+            tmin = mean(tmin),
+            tmax = mean(tmax),
+            tavg = mean(tavg))
+    df <- filter(df, year >= 1900 & year <= 2012)
+
+    saveRDS(df, paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/fips/", x))
 }
 
 files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/")
-infiles <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/")
+infiles <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/fips/")
+ 
 i <- files
 i <- setdiff(files, infiles)
 
@@ -101,12 +145,26 @@ clusterCall(cl, function() library(dplyr))
 parLapply(cl, X = i, fun = comp)
 stopCluster(cl)
 
-#rbind together
-files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/", full.names = TRUE)
- 
+files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/fips/", full.names = TRUE)
+
 library(data.table)
 full_degree_days <- rbindlist(lapply(files, readRDS))
- 
-# Save grids
-saveRDS(full_degree_days, "/home/johnw/Dust_Bowl/Data/degree_days/grids_degree_days.rds")
- 
+
+# Save fips
+library(readr)
+library(foreign)
+saveRDS(full_degree_days, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_days_1900-2013.rds")
+write_csv(full_degree_days, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_days_1900-2013.csv")
+write.dta(full_degree_days, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_days_1900-2013.dta")
+
+# For error checking .rds files 
+files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreedays/fips/", full.names = TRUE) 
+test <- as.data.frame(files)
+files <- files[1890:3105]
+
+for (i in files){
+  df <- readRDS(i)
+  print(i)
+}
+
+
