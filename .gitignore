@@ -1,4 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
-Data/
+Data/Base/
+Data/NCDC/
+Data/PRISM/
+Data/Verify/
