@@ -3,7 +3,7 @@
 # Author    : A. John Woodill
 # Date      : 11/23/2015
 # Filename  : interpolation_mc.R
-# Code      : Build fine scale data for tmax,tmin and ppt using multi-cores
+# Code      : Build fine scale data for tmax, and tmin using multi-cores
 #             (1) Build data frame for each PRISM and use spline interpolation to get base range
 #             (2) Use relative anomaly to adjust base PRISM to NCDC daily
 #
