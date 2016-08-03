@@ -6,11 +6,13 @@ The following repo builds daily gridded weather data for the continental United 
 
 **Introduction**
 
-In order to determine non-linear temperature effects fine scale (daily) gridded weather data needs to be available.  Unfortunately, this data does not exist for the historical time period 1900-1950.  There are daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations, but it is sparse and not consistent across days.
+Degree days and time in each degree provides a measure of looking at temperature effects during the day.  These measures are used in phenology and by farmers to determine plant development.  Degree days can provide a metric for understanind if it is getting hotter over a time interval.  Degree days can be defined as the amount of time during a day that the environment is exposed to a certain threshold of temperature. For example, suppose for half of the day it is 30°C. A simple calculation of degree days above 25°C would involve 5 degrees for half of a day, so for that particular day the degree days above 25°C would be 2.5. The exposure during the day becomes longer as it becomes warmer or shorter if it is cooler.  Time in each degree is similiar in definition, but instead each degree gets a time interval.  Time in each degree is defined as the length of heat exposure to each one-degree Celsisus temperature interval in each day.  (See Synyder 1985 and ***)
 
-PRISM (http://www.prism.oregonstate.edu/) data is some of the best weather data available and is gridded on 2.5 x 2.5 mile scale across the same region. Daily data is not available, but monthly data is.  In order to build fine scale weather data both NCDC and PRISM data sets will be used.  
+Daily minimum and maximum weather data is needed in order to calculate these two variables.  More importantly, gridded data (2.5 x 2.5 miles) provides a much more accurate relationship to regions and are generally thought of as more precise than using zip codes -- although the grids are aggregated down to zip codes.  This data is not available for the suggested time period so an interpolation technique is used to get to daily data using monthly data.  Calculations of degree days and time in each degree can then be extracted using the necessary mathmatical technique.
 
-The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.
+Using daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations and PRISM (http://www.prism.oregonstate.edu/) data that provides monthly data on a grid a relatively anomaly spline interpolation technique is used to build fine scale weather data on a 2.5 x 2.5 mile grid scale.
+
+The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.  For an example see [interpolation technique.pdf](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf)
 
 ### Data Setup
 
@@ -60,14 +62,14 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 **Data Setup Folder**
 
-1. [ncdc_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ncdc_convert.R): Converts and cleans up ncdc data for Dust Bowl region
+1. [ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ncdc_convert.R): Converts and cleans up ncdc data for Dust Bowl region
   * (1) Subset out NCDC stations with data greater than 1899 and the region
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
-    * [ghcnd-stations.csv](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ghcnd-stations.csv)
-    * [ghcnd-inventory.txt](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ghcnd-inventory.txt)
+    * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ghcnd-stations.csv)
+    * [ghcnd-inventory.txt](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ghcnd-inventory.txt)
 
-2. [prism_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/prism_convert.R): converts and cleans up PRISM data for region
+2. [prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
   * (2) Merge and save each gridNumber for each tmax and tmin to directory
   * File Needed: 
@@ -105,6 +107,9 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_lookup_unique.rds : from lookup.R
 
 
+References
+
+Snyder RL (1985) Hand calculating degree days. Agr Forest Meterol 35:353–358.
  
 
 
