@@ -117,11 +117,11 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 **Calculating degree days**
 
-[degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R)
+[degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R): calculate degree days from the interpolated fine scale weather data 
 
 **Calculating time in each degree**
 
-[degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R)
+[degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
 
 -------
 
