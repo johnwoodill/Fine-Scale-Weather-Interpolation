@@ -78,7 +78,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 **Data Setup Folder**
 
-1. [ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ncdc_convert.R): Converts and cleans up ncdc data for Dust Bowl region
+1. [ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ncdc_convert.R): Converts and cleans up ncdc data 
   * (1) Subset out NCDC stations with data greater than 1899 and the region
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
