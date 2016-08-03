@@ -3,9 +3,9 @@
 # Author    : A. John Woodill
 # Date      : 10/27/2015
 # Filename  : ncdc_convert.R
-# Code      : Converts and cleans up ncdc data for Dust Bowl region
-#             (1) Subset out NCDC stations with data greater than 1899 and in the Dust Bowl Region
-#             Move appropriate *.dly files to /run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/NCDC/
+# Code      : Converts and cleans up NCDC data
+#             (1) Subset out NCDC stations with data greater than 1899 
+#             Move appropriate *.dly files to /run/media/john/1TB/Projects/Fine-Scale-Weather-Interpolation/Data/NCDC/
 #
 #             (2) Aggregate all the data for each station for each year in NCDC
 #-------------------------------------------------------------------------------------------------------
@@ -32,13 +32,10 @@ readDailyInventory <- function(filename = "DailyInv.txt",elements = NULL ){
 }
 ###############################################################################################################################
 #
-#  (1) Subset out NCDC stations with data greater than 1899 and in the Dust Bowl Region;
-#      Move appropriate *.dly files to /run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/NCDC/
+#  (1) Subset out NCDC stations with data greater than 1899 
+#      Move appropriate *.dly files to /run/media/john/1TB/Projects/Fine-Scale-Weather-Interpolation/Data/NCDC/
 #
 ###############################################################################################################################
-
-# Load in ppt data
-#db_df_ppt <- readRDS("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/PRISM/db_ppt_1899-2001.rds")
 
 # Load station id
 sid <- read.csv("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/ghcnd-stations.csv", stringsAsFactors = FALSE)
