@@ -14,6 +14,14 @@ Using daily data available from the National Climatic Data Center (NCDC: http://
 
 The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.  For a simplegit example in R see [interpolation technique.pdf](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf)
 
+### Download
+
+[fips_degree_days_1900-2013.csv](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.csv)
+
+[fips_degree_days_1900-2013.dta](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.dta)
+
+*** Time in each degree coming soon.....
+
 ### Data Setup
 
 The following outlines the procedure for building fine scale weather data.
