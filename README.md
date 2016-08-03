@@ -75,7 +75,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
     * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-stations.csv)
-    * [ghcnd-inventory.txt](ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt)
+    * ghcnd-inventory.txt: ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt
 
 2. [prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
@@ -107,7 +107,15 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_lookup_unique.rds : from lookup.R
 
 
-References
+### Calculating degree days
+
+[degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R)
+
+### Calculating time in each degree
+
+[degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R)
+
+### References
 
 Snyder RL (1985) Hand calculating degree days. Agr Forest Meterol 35:353–358.
  
