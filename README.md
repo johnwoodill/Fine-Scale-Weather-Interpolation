@@ -75,7 +75,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
     * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-stations.csv)
-    * [ghcnd-inventory.txt](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-inventory.txt)
+    * [ghcnd-inventory.txt](ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt)
 
 2. [prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
