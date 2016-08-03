@@ -107,8 +107,8 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_nearest.rds : from lookup.R
     * ncdc_lookup_unique.rds : from lookup.R
  
-5. [base_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/base_convert.R): Merge tmax_tmin and ppt for grids and fips
-  * (1) Merge tmax_tmin and ppt grids
+5. [base_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/base_convert.R): Merge tmax_tmin for grids and fips
+  * (1) Merge tmax_tmin 
   * (2) Merge full grids by fips
   * Files Needed:
     * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
