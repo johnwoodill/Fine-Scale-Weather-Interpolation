@@ -1,5 +1,7 @@
 ### Building Fine Scale Weather Data from 1900-2013
 
+-------
+
 **About**
 
 The following repo builds daily gridded weather data for the continental United States from 1900-2013.  The data is allocated to grids and then aggregated to fips (zip codes).  Degree days and degree time are calculated as a result of fine scale weather data.
@@ -14,6 +16,8 @@ Using daily data available from the National Climatic Data Center (NCDC: http://
 
 The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.  For a simplegit example in R see [interpolation technique.pdf](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf)
 
+-------
+
 ### Download
 
 [fips_degree_days_1900-2013.csv](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.csv)
@@ -21,6 +25,8 @@ The main idea behind building gridded data is to use the monthly temperatures fr
 [fips_degree_days_1900-2013.dta](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.dta)
 
 *** Time in each degree coming soon.....
+
+-------
 
 ### Data Setup
 
@@ -63,6 +69,8 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 2. Relative Anamoly Interpolation
   * Use the Inverse Distance Weighted (IDW) relative anamoly to further interpolate the data.  The following shows a graph of the interpolated points from IDW and the previous spline:
 ![RA Interpolation](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Figures/RA_Interpolation.png)
+
+-------
 
 ##R Code File Descriptions
 
@@ -107,13 +115,15 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_lookup_unique.rds : from lookup.R
 
 
-### Calculating degree days
+**Calculating degree days**
 
 [degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R)
 
-### Calculating time in each degree
+**Calculating time in each degree**
 
 [degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R)
+
+-------
 
 ### References
 
