@@ -12,7 +12,7 @@ Daily minimum and maximum weather data is needed in order to calculate these two
 
 Using daily data available from the National Climatic Data Center (NCDC: http://www.ncdc.noaa.gov/) for various weather stations and PRISM (http://www.prism.oregonstate.edu/) data that provides monthly data on a grid a relatively anomaly spline interpolation technique is used to build fine scale weather data on a 2.5 x 2.5 mile grid scale.
 
-The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.  For an example see [interpolation technique.pdf](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf)
+The main idea behind building gridded data is to use the monthly temperatures from PRISM, place them at the midpoint (15th day) of each month for each year, and run a spline through each midpoint for each month of each day for each grid.  This will in turn produce fine scale gridded daily data.  Next, find the relative anamoly where R = NCDC(month) / PRISM(month). Finally, use Inverse Distance Weighting (IDW) to find the 5 closest NCDC stations for each PRISM grid to weight the temperature changes and apply the relative anamoly to this weighted temperature.  This will produce gridded 2.5 x 2.5 mile daily data that is between the PRISM and NCDC data.  For a simplegit example in R see [interpolation technique.pdf](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Documentation/interpolation_technique.pdf)
 
 ### Data Setup
 
@@ -66,16 +66,16 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
   * (1) Subset out NCDC stations with data greater than 1899 and the region
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
-    * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ghcnd-stations.csv)
-    * [ghcnd-inventory.txt](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ghcnd-inventory.txt)
+    * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-stations.csv)
+    * [ghcnd-inventory.txt](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-inventory.txt)
 
 2. [prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
   * (2) Merge and save each gridNumber for each tmax and tmin to directory
   * File Needed: 
-    * [gridInfo.csv](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/gridInfo.csv)
+    * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
 
-3. [lookup.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/lookup.R): Builds three lookup tables: 
+3. [lookup.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/lookup.R): Builds three lookup tables: 
   * ncdc_lookup_unique.rds - All unique NCDC stations and locations
   * prism_lookup_unique.rds - All unique PRISM grids and locations
   * prism_nearest.rds - 5 closest NCDC stations for each PRISM grid
@@ -83,7 +83,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * NCDC_db_sid.csv : from ncdc_convert.R
     * db_tmin_1899-1951.rds : from prism_conver.R
 
-4. [tmax_tmin_interpolation.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/tmax_tmin_interpolation.R): Finds fine scale data using spline interpolation and relative anamoly for tmax and tmin
+4. [tmax_tmin_interpolation_mc.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/tmax_tmin_interpolation_mc.R): Finds fine scale data using spline interpolation and relative anamoly for tmax and tmin
   * (1) Build data frame for each PRISM and use spline interpolation to get base range
   * (2) Use relative anomaly to adjust base PRISM to NCDC
   * Files Needed:
@@ -91,19 +91,11 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_nearest.rds : from lookup.R
     * ncdc_lookup_unique.rds : from lookup.R
  
-5. [ppt_interpolation.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/ppt_interpolation.R): Finds fine scale data using spline interpolation and relative anamoly for ppt
-  * (1) Build data frame for each PRISM and use spline interpolation to get base range
-  * (2) Use relative anomaly to adjust base PRISM to NCDC
-  * Files Needed:
-    * prism_lookup_unique.rds : from lookup.R
-    * prism_nearest.rds : from lookup.R
-    * ncdc_lookup_unique.rds : from lookup.R 
-
-6. [base_convert.R](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/base_convert.R): Merge tmax_tmin and ppt for grids and fips
+5. [base_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/base_convert.R): Merge tmax_tmin and ppt for grids and fips
   * (1) Merge tmax_tmin and ppt grids
   * (2) Merge full grids by fips
   * Files Needed:
-    * [gridInfo.csv](https://github.com/johnwoodill/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/blob/master/Data%20Setup/gridInfo.csv)
+    * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
     * prism_lookup_unique.rds : from lookup.R
 
 
