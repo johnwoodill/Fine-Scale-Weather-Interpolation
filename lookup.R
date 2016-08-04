@@ -32,7 +32,7 @@ mo2Num <- function(x) match(tolower(x), tolower(month.abb))
 #
 ###############################################################################################################################
 
-# Get all NCDC stations in Dust Bowl region
+# Get all NCDC stations 
 sid <- read.csv("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/NCDC_sid.csv", stringsAsFactors = FALSE)
 
 ncdc_lookup_unique <- distinct(sid, id)
