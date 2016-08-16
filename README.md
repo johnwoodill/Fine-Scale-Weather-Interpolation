@@ -125,8 +125,6 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
     * prism_lookup_unique.rds : from lookup.R
 
-6. [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): 
-
 **Parent Folder: Other**
 
 * Calculating degree days
@@ -137,7 +135,9 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 * Precipitation
  * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): aggregates monthly precipitation data from PRISM grids to fips.
- 
+  * Files Needed:
+    * ppt_1899-2014.rds : from prism_convert.R
+
 -------
 
 ### References
