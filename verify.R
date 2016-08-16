@@ -71,5 +71,6 @@ base <- spread(base, element, mean)
 base$type <- "BASE"
 
 dat <- rbind(base, ncdc, prism2)
-
-ggplot(dat, aes(year, tavg, color = type)) + geom_smooth()
+dat$type <- as.factor(dat$type)
+dat$year <- as.numeric(dat$year)
+ggplot(dat, aes(year, tmin, color = type)) + geom_smooth()

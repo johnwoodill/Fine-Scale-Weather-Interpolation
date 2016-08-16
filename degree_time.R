@@ -80,7 +80,7 @@ aFipsYear  =  function(z){
 
 ### Begin for loop to cycle through each fips
 
-files <- list.files("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Base/fips/")
+files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/")
 
 # Create progress bar as this for loop takes a while
 pb <- txtProgressBar(min = 0, max = length(unique(files)), initial = 0)
@@ -88,7 +88,7 @@ stepi <- 0
 
 for (i in unique(files)){
   days <- data.frame()
-  w <- readRDS(paste0("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Base/fips/", i))
+  w <- readRDS(paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/tmax_tmin/fips/", i))
   Trows <- expand.grid(unique(w$fips), unique(w$year))
   names(Trows) <- c("fips", "year")
   T <- 0:45
@@ -105,7 +105,7 @@ for (i in unique(files)){
     fips <- select(fips, fips, year, everything())
     days <- rbind(days, fips)
   }
-  saveRDS(days, paste0("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Degree_Time/fips/", i))
+  saveRDS(days, paste0("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreetime/fips/", i))
   stepi = stepi + 1
   setTxtProgressBar(pb, stepi)
 }
@@ -116,19 +116,17 @@ for (i in unique(files)){
 #
 ############################################################
 
-days_files <- list.files("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Degree_Time/fips/")
+library(data.table)
 
-full_degree_days <- data.frame()
+files <- list.files("/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreetime/fips/", full.names = TRUE)
 
-# Create progress bar as this for loop takes a while
-pb <- txtProgressBar(min = 0, max = length(unique(days_files)), initial = 0)
-stepi <- 0
+full_degree_time <- rbindlist(lapply(files, readRDS))
 
-for (i in unique(days_files)){
-  df <- readRDS(paste0("/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Degree_Time/fips/", i))
-  full_degree_time <- rbind(full_degree_days, df)
-    stepi = stepi + 1
-  setTxtProgressBar(pb, stepi)
-}
+# Save fips
+library(readr)
+library(foreign)
+saveRDS(full_degree_time, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_time_1900-2013.rds")
+write_csv(full_degree_time, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_time_1900-2013.csv")
+write.dta(full_degree_time, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/fips_degree_time_1900-2013.dta")
 
-saveRDS(full_degree_days, "/run/media/john/1TB/Projects/Non-Linear-Temperature-Effects-of-the-Dust-Bowl/Data/Degree_Time/full_degree_time.rds")
+saveRDS(full_degree_time, "/home/johnw/Projects/Fine-Scale-Weather-Interpolation/Data/Base/degreetime/fips/")
