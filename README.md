@@ -127,7 +127,8 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
  * [degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
 
 * Precipitation
- * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R) 
+ * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): aggregates monthly precipitation data from PRISM grids to fips.
+ 
 -------
 
 ### References
