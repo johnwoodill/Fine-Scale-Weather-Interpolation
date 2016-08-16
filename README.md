@@ -1,4 +1,7 @@
-### Building Fine Scale Weather Data from 1900-2013
+[![Wercker](https://img.shields.io/wercker/ci/wercker/docs.svg?maxAge=2592000)]() 
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+
+### Fine Scale Weather Data from 1900-2013
 
 -------
 
