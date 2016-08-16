@@ -118,14 +118,16 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_lookup_unique.rds : from lookup.R
 
 
-**Calculating degree days**
+**Parent Folder**
 
-[degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R): calculate degree days from the interpolated fine scale weather data 
+* Calculating degree days
+ * [degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R): calculate degree days from the interpolated fine scale weather data 
 
-**Calculating time in each degree**
+* Calculating time in each degree
+ * [degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
 
-[degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
-
+* Precipitation
+ * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R) 
 -------
 
 ### References
