@@ -135,8 +135,8 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 * Precipitation
  * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): aggregates monthly precipitation data from PRISM grids to fips.
-  * Files Needed:
-    * ppt_1899-2014.rds : from prism_convert.R
+   * Files Needed:
+     * ppt_1899-2014.rds : from prism_convert.R
 
 -------
 
