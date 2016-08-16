@@ -1,7 +1,7 @@
 ######################################################################################################################
 #--------------------------------------------------------------------------------------------------------------------
 # Author    : A. John Woodill
-# Date      : 11/4/2015
+# Date      : 08/16/2016
 # Filename  : lookup.R
 # Code      : Build look up tables for NCDC data and PRISM data to find nearest NCDC stations to PRISM grid
 #             (1) NCDC look up table

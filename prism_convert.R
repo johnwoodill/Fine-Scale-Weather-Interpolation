@@ -1,7 +1,7 @@
 #######################################################################################################
 #------------------------------------------------------------------------------------------------------
 # Author    : A. John Woodill
-# Date      : 10/05/2015
+# Date      : 08/16/2016
 # Filename  : prism_convert.R
 # Code      : (1) Converts tmax, tmean, ppt, tmin *.bil to data frame and write as RData 
 #             (send to MySql database option implemented)

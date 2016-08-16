@@ -1,7 +1,7 @@
 #########################################################################################################
 #-------------------------------------------------------------------------------------------------------
 # Author    : A. John Woodill
-# Date      : 10/27/2015
+# Date      : 08/16/2016
 # Filename  : ncdc_convert.R
 # Code      : Converts and cleans up NCDC data
 #             (1) Subset out NCDC stations with data greater than 1899 
