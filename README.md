@@ -87,7 +87,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
   Code should be run in this order.  Deviation from not running in the following order will result in errors and problems with building the data as each of the files depends on the output of the previous.
 
-**Data Setup Folder**
+**Data Setup**
 
 1. [ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ncdc_convert.R): Converts and cleans up ncdc data 
   * (1) Subset out NCDC stations with data greater than 1899 and the region
@@ -108,7 +108,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
   * prism_nearest.rds - 5 closest NCDC stations for each PRISM grid
   * Files Needed:
     * NCDC_db_sid.csv : from ncdc_convert.R
-    * db_tmin_1899-1951.rds : from prism_conver.R
+    * db_tmin_1899-1951.rds : from prism_convert.R
 
 4. [tmax_tmin_interpolation_mc.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/tmax_tmin_interpolation_mc.R): Finds fine scale data using spline interpolation and relative anamoly for tmax and tmin
   * (1) Build data frame for each PRISM and use spline interpolation to get base range
@@ -125,8 +125,9 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
     * prism_lookup_unique.rds : from lookup.R
 
+6. [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): 
 
-**Parent Folder**
+**Parent Folder: Other**
 
 * Calculating degree days
  * [degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R): calculate degree days from the interpolated fine scale weather data 
