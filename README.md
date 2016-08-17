@@ -1,5 +1,6 @@
-[![Wercker](https://img.shields.io/wercker/ci/wercker/docs.svg?maxAge=2592000)]() 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+![](https://img.shields.io/R version/3.2.3.png?color=red)
+![](https://img.shields.io/build/passing.png?color=green)
+![](https://img.shields.io/license/MIT.png?color=blue)
 
 ### Fine Scale Weather Data from 1900-2013
 
