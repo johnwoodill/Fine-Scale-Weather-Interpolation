@@ -1,5 +1,5 @@
 ![](https://img.shields.io/R version/3.2.3.png?color=red)
-![](https://img.shields.io/build/passing.png?color=green)
+![](https://img.shields.io/build/passing.png?color=brightgreen)
 ![](https://img.shields.io/license/MIT.png?color=blue)
 
 ### Fine Scale Weather Data from 1900-2013
