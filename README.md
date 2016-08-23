@@ -25,8 +25,8 @@ The main idea behind building gridded data is to use the monthly temperatures fr
 ### Download
 
 * Degree Days
- * CSV: [fips_degree_days_1900-2013.csv](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.csv)
- * STATA: [fips_degree_days_1900-2013.dta](https://s3-us-west-1.amazonaws.com/degree.days/fips_degree_days_1900-2013.dta)
+ * CSV: [fips_degree_days_1900-2013.csv](https://s3-us-west-1.amazonaws.com/weather.measurements/fips_degree_days_1900-2013.csv)
+ * STATA: [fips_degree_days_1900-2013.dta](https://s3-us-west-1.amazonaws.com/weather.measurements/fips_degree_days_1900-2013.dta)
 
 * Time in each degree
  * CSV: [fips_degree_time_1900-2013.csv](https://s3-us-west-1.amazonaws.com/weather.measurements/fips_degree_time_1900-2013.csv)
