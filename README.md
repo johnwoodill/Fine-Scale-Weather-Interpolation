@@ -66,7 +66,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 -------
 
-##R Code File Descriptions
+## R Code File Descriptions
 
   Code should be run in this order.  Deviation from not running in the following order will result in errors and problems with building the data as each of the files depends on the output of the previous.
 
