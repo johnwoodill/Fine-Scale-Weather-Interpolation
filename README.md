@@ -72,20 +72,20 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 
 **Data Setup**
 
-1. [ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/ncdc_convert.R): Converts and cleans up ncdc data 
+1. [1-ncdc_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/1-ncdc_convert.R): Converts and cleans up ncdc data 
   * (1) Subset out NCDC stations with data greater than 1899 and the region
   * (2) Aggregate all the data for each station for each year in NCDC
   * Files Needed: 
     * [ghcnd-stations.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/ghcnd-stations.csv)
     * ghcnd-inventory.txt: ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt
 
-2. [prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/prism_convert.R): converts and cleans up PRISM data for region
+2. [2-prism_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/2-prism_convert.R): converts and cleans up PRISM data for region
   * (1) Converts ppt, tmax, tmin *.bil to data frame and write as .rds
   * (2) Merge and save each gridNumber for each tmax and tmin to directory
   * File Needed: 
     * [gridInfo.csv](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/Data/gridInfo.csv)
 
-3. [lookup.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/lookup.R): Builds three lookup tables: 
+3. [3-lookup.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/3-lookup.R): Builds three lookup tables: 
   * ncdc_lookup_unique.rds - All unique NCDC stations and locations
   * prism_lookup_unique.rds - All unique PRISM grids and locations
   * prism_nearest.rds - 5 closest NCDC stations for each PRISM grid
@@ -93,7 +93,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * NCDC_db_sid.csv : from ncdc_convert.R
     * db_tmin_1899-1951.rds : from prism_convert.R
 
-4. [tmax_tmin_interpolation_mc.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/tmax_tmin_interpolation_mc.R): Finds fine scale data using spline interpolation and relative anamoly for tmax and tmin
+4. [4-tmax_tmin_interpolation_mc.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/4-tmax_tmin_interpolation_mc.R): Finds fine scale data using spline interpolation and relative anamoly for tmax and tmin
   * (1) Build data frame for each PRISM and use spline interpolation to get base range
   * (2) Use relative anomaly to adjust base PRISM to NCDC
   * Files Needed:
@@ -101,7 +101,7 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
     * prism_nearest.rds : from lookup.R
     * ncdc_lookup_unique.rds : from lookup.R
  
-5. [base_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/base_convert.R): Merge tmax_tmin for grids and fips
+5. [5-base_convert.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/5-base_convert.R): Merge tmax_tmin for grids and fips
   * (1) Merge tmax_tmin 
   * (2) Merge full grids by fips
   * Files Needed:
@@ -111,15 +111,18 @@ As discussed above, the main idea is to use a spline to interpolate monthly aver
 **Parent Folder: Other**
 
 * Calculating degree days
- * [degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_days.R): calculate degree days from the interpolated fine scale weather data 
+ * [6-degree_days.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/6-degree_days.R): calculate degree days from the interpolated fine scale weather data 
 
 * Calculating time in each degree
- * [degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
+ * [7-degree_time.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/7-degree_time.R): calculate time in each degree from the interpolated fine scale weather data 
 
 * Precipitation
- * [precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/precipitation.R): aggregates monthly precipitation data from PRISM grids to fips.
+ * [8-precipitation.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/8-precipitation.R): aggregates monthly precipitation data from PRISM grids to fips.
    * Files Needed:
      * ppt_1899-2014.rds : from prism_convert.R
+
+* Validate Data
+ * [9-verify.R](https://github.com/johnwoodill/Fine-Scale-Weather-Interpolation/blob/master/9-verify.R): validate interpolation using degree days and time in each degree
 
 -------
 
