@@ -2,6 +2,8 @@
 
 -------
 
+![](https://github.com/johnwoodill/US-Degree-Days-Heat-Map/blob/master/dd30.png?raw=true)
+
 **About**
 
 The following repo builds daily gridded weather data for the continental United States from 1900-2013.  The data is allocated to grids and then aggregated to fips (zip codes).  Degree days and degree time are calculated as a result of fine scale weather data.
