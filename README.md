@@ -8,9 +8,9 @@ The following repo builds daily gridded weather data for the continental United 
 
 **Downloads**
 
-![US Degree Days 1900-2013](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_degree_days_1900-2013.csv)
+[US Degree Days 1900-2013 [fips_degree_days_1900-2013.csv]](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_degree_days_1900-2013.csv)
 
-![US Precipitation 1900-2013](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_precipitation_1900-2013.csv)
+[US Precipitation 1900-2013 [fips_precipitation_1900-2013.csv]](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_precipitation_1900-2013.csv)
 
 
 **Introduction**
