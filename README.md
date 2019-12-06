@@ -1,7 +1,3 @@
-![](https://img.shields.io/R/v3.2.3.png?color=red)
-![](https://img.shields.io/build/passing.png?color=brightgreen)
-![](https://img.shields.io/license/MIT.png?color=blue)
-
 ### Fine Scale Weather Data from 1900-2013
 
 -------
@@ -9,6 +5,13 @@
 **About**
 
 The following repo builds daily gridded weather data for the continental United States from 1900-2013.  The data is allocated to grids and then aggregated to fips (zip codes).  Degree days and degree time are calculated as a result of fine scale weather data.
+
+**Downloads**
+
+![US Degree Days 1900-2013](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_degree_days_1900-2013.csv)
+
+![US Precipitation 1900-2013](https://interpolated-weather-data-1900-2013.s3-us-west-1.amazonaws.com/fips_precipitation_1900-2013.csv)
+
 
 **Introduction**
 
